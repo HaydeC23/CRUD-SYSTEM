@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Reglas para la colección 'products'
+    match /products/{productId} {
+      // Solo usuarios autenticados pueden leer, crear, actualizar y eliminar productos
+      allow read, create, update, delete: if request.auth != null;
+    }
+  }
+}
